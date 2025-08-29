@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Todos</title>
-</head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="/css/style.css">
 <body>
-  <h1>Todo List</h1>
+    <h1>Todos</h1>
+    <ul>
+    <% todos.forEach( el => { %>
+            <li class='todoItem' data-id='<%=el._id%>'>
+                <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                <span class='del'> 🗑 </span>
+            </li>
+    <% }) %>    
+    </ul>
 
-  <!-- Show welcome message if user exists -->
-  <% if (user) { %>
     <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-  <% } else { %>
-    <h2>Welcome! You have <%= left %> things left to do.</h2>
-  <% } %>
 
-  <ul>
-    <% todos.forEach(todo => { %>
-      <li>
-        <%= todo.todo %> 
-        <% if (todo.completed) { %>
-          ✅
-        <% } else { %>
-          ❌
-        <% } %>
-      </li>
-    <% }) %>
-  </ul>
+    <form action="/todos/createTodo" method='POST'>
+        <input type="text" placeholder="Enter Todo Item" name='todoItem'>
+        <input type="submit">
+    </form>
 
-  <!-- Add new todo -->
-  <form action="/todos/createTodo" method="POST">
-    <input type="text" name="todoItem" placeholder="Add new task" required>
-    <button type="submit">Add</button>
-  </form>
+    <a href="/logout">Logout</a>
+
+    <script src="/js/script.js"></script>
+   
+
 </body>
 </html>
