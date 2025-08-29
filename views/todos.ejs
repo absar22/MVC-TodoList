@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todos</title>
+</head>
+<body>
+  <h1>Todo List</h1>
+
+  <!-- Show welcome message if user exists -->
+  <% if (user) { %>
+    <h2><%= user.userName %> has <%= left %> things left to do.</h2>
+  <% } else { %>
+    <h2>Welcome! You have <%= left %> things left to do.</h2>
+  <% } %>
+
+  <ul>
+    <% todos.forEach(todo => { %>
+      <li>
+        <%= todo.todo %> 
+        <% if (todo.completed) { %>
+          ✅
+        <% } else { %>
+          ❌
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+
+  <!-- Add new todo -->
+  <form action="/todos/createTodo" method="POST">
+    <input type="text" name="todoItem" placeholder="Add new task" required>
+    <button type="submit">Add</button>
+  </form>
+</body>
+</html>
