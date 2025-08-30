@@ -1,3 +1,5 @@
+
+
 const deleteBtn = document.querySelectorAll('.del')
 
 Array.from(deleteBtn).forEach((el)=>{
@@ -23,5 +25,31 @@ async function deleteTodo(){
 }
 
 
-const todoId = this.parentNode.dataset.id
-console.log("DELETE CLICKED, ID:", todoId)
+
+const todoLeft = document.querySelectorAll('span.not')
+
+Array.from(todoLeft).forEach(element => {
+    element.addEventListener('click', markComplete )
+})
+
+
+async function markComplete(){
+   const todoId = this.parentNode.dataset.id
+   try{
+    const response = await fetch('/todos/markComplete', {
+    method: "PUT",
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({
+        'todoIdFromJSFile': todoId
+    })
+})
+
+    const data = await response.json()
+    console.log(data)
+    location.reload()
+
+   }catch(err){
+
+    console.log(err)
+   }
+}

@@ -11,6 +11,7 @@ const PORT = 8000
 
 dotenv.config({ path: './config/config.env' })
 
+// Connected to database
 connectDB()
 
 // Middleware

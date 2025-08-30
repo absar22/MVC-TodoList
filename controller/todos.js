@@ -25,7 +25,7 @@ module.exports = {
         }
     },
     deleteTodo: async (req,res) => {
-            console.log("BODY:", req.body) 
+          
           console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
@@ -35,6 +35,17 @@ module.exports = {
             console.log(err)
              res.status(500).json("Delete failed")
         }
+    },
+    markComplete: async (req,res) => {
+         try{
+             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile}, {
+                completed: true
+             })
+             console.log('Mark Complete')
+             res.json('Mark Complete')
+         }catch(err){
+              console.log(err)
+         }
     }
 
 }
