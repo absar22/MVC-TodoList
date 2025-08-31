@@ -46,6 +46,18 @@ module.exports = {
          }catch(err){
               console.log(err)
          }
+    },
+    markInComplete: async(req,res) => {
+        try{
+            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
+                completed: false
+            })
+            console.log('MarkInComplete')
+            res.json('MarkInComplete')
+
+        }catch(err){
+            console.log(err)
+        }
     }
 
 }
